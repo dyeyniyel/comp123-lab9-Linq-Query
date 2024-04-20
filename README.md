@@ -1,70 +1,3 @@
-LINQ – Selection, Filtering, Ordering, Grouping and Projection Operations
-We will use a console application to try these queries. First you will need to copy the class definitions and data source from the code appendices. Your subsequent lab will also need these definitions.
-For this first lab we will experiment with some basic queries
-Sample to Practice
-Selection
-//selects all data objects from the strongly typed 
-//collection persons. The result of the query
-// is of type IEnumerable<Person>
-var r1 = from p in persons select p;
-
-//filters only female. Notice we are re-using the variable r1, the return types of the query are the same
-r1 = from p in persons where p.IsFemale select p;
-
-//only US citizens
-r1 = from p in persons where p.Country == "US" select p;
-
-//last name begins with "W"
-r1 = from p in persons where p.Name.Split()[0] == "W" select p;
-
-Ordering
-//ordering by age
-r1 = from p in persons orderby p.Age select p;
-
-//order by last name
-r1 = from p in persons orderby p.Name.Split()[1] select p;
-
-//order by last name then first name
-r1 = from p in persons orderby p.Name.Split()[1], p.Name.Split()[0] select p;
-
-Grouping
-//grouping according to age buckets
-//The result of the query is of type
-//IEnumerable<IGrouping<string, Person>>
-var r3 = from p in persons
-  group p by p.IsFemale;
-
-Projections
-The above queries are termed selection because it returns a type that is based on the type of the collection. A projection returns a new type
-//The following returns a query of type IEnumerable<string>
-var r4 =
-  from p in persons
-  where p.Country == "US"
-  select p.Name;
-
-int[] numbers = { 2, 3, 4, 5 };
-//the following returns a query of type IEnumerable<a>
-var r5 =
-from x in numbers
-  select new { Radius = x, Area = Math.PI * x * x };
-
-To Demonstrate
-Write the following queries using query syntax. You must also write the appropriate loops to display results correctly. You will use the same class and data source definitions as you did in the lab. You will query only the person data store. 
-Each query must be documented VERY clearly. i.e. copy the problem statement above each of your query.
-The output for each query MUST be simple enough so that the instructor will be able to grade your work without too much difficulty, i.e. separate the each output by blank lines and the description of each query.
-1.	Select all the persons with assets of over 50B dollars.
-2.	Select all non-US citizens.
-3.	Select the name of all the females from India.
-Your query should only capture the person’s name. (This is a projection query)
-4.	Select all persons whose first name is less than five letters long.
-5.	Sort the collection by assets. 
-Your query should only capture the person’s name and asset.
-6.	Group the collection by country.
-7.	Sort the above grouping.
-8.	Make up three queries of your own.
-You will not get a mark if you do a simple filter or order!!!
-
-
 Code Appendices
 
 Definitions for the classes
@@ -192,4 +125,3 @@ static List<Fruit> fruits = new List<Fruit>()
   new Fruit(){ Name="Strawberry", Origin="Russia", Price=0.45 },
   new Fruit(){ Name="Avocado", Origin="Mexico", Price=0.45 }
 };
-
